@@ -67,9 +67,16 @@ namespace Курсова
 
         private void Confirm(object sender, EventArgs e)
         {
-            var resp = MessageBox.Show("Are you sure you want to delete the directory: \"C:/\"?", "Deleting Windows",
-                MessageBoxButtons.OKCancel);
-            MessageBox.Show(resp == DialogResult.Cancel ? "А просив же не лізти 🙃" : "Ага, і лінукс поставлю..", "Не чіпай поки конфірм");
+            if (Program.InputedArray.Count < 2)
+            {
+                MessageBox.Show("There is nothing to sort! Please, add several elements!", "Not enough elements");
+                return;
+            }
+            this.Hide();
+            new DisplayResultForm().ShowDialog();
+            if (Program.IsClosedByUser) Close();
+            this.Show();
+            Program.IsClosedByUser = true;
         }
 
         private void Clear(object sender, EventArgs e)

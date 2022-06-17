@@ -7,10 +7,10 @@ Visualizing bubble sort with animation using WinForms
 * Manual array input
 * Removing some elements from an array
 * Ramoving entire array
+* Visualizing an array using labels
+* Adding the ***Quick result*** option, that skips animation
+* Adding ***GoBack*** button
 
 ## Next sprint:
 
-* Visualizing an array using labels
 * Creation sorting animation via ***Timer.Tick***
-* Adding the ***Quick result*** option, that skips animation
-* Adding ***GoBack*** button

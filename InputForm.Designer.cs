@@ -48,7 +48,7 @@ namespace Курсова
             // 
             // TitleLabel
             // 
-            this.TitleLabel.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TitleLabel.Font = Style.TitleFont;
             this.TitleLabel.Location = new System.Drawing.Point(141, 45);
             this.TitleLabel.Name = "TitleLabel";
             this.TitleLabel.Size = new System.Drawing.Size(488, 55);
@@ -58,7 +58,7 @@ namespace Курсова
             // 
             // ArrayLabel
             // 
-            this.ArrayLabel.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ArrayLabel.Font = Style.StandardFont;
             this.ArrayLabel.Location = new System.Drawing.Point(92, 138);
             this.ArrayLabel.Name = "ArrayLabel";
             this.ArrayLabel.Size = new System.Drawing.Size(520, 37);
@@ -68,7 +68,7 @@ namespace Курсова
             // 
             // FromFileButton
             // 
-            this.FromFileButton.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.FromFileButton.Font = Style.StandardFont;
             this.FromFileButton.Location = new System.Drawing.Point(618, 136);
             this.FromFileButton.Name = "FromFileButton";
             this.FromFileButton.Size = new System.Drawing.Size(120, 39);
@@ -80,7 +80,7 @@ namespace Курсова
             // 
             // AddButton
             // 
-            this.AddButton.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.AddButton.Font = Style.StandardFont;
             this.AddButton.Location = new System.Drawing.Point(417, 225);
             this.AddButton.Name = "AddButton";
             this.AddButton.Size = new System.Drawing.Size(161, 47);
@@ -92,7 +92,7 @@ namespace Курсова
             // 
             // RemoveButton
             // 
-            this.RemoveButton.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.RemoveButton.Font = Style.StandardFont;
             this.RemoveButton.Location = new System.Drawing.Point(584, 225);
             this.RemoveButton.Name = "RemoveButton";
             this.RemoveButton.Size = new System.Drawing.Size(154, 47);
@@ -105,7 +105,7 @@ namespace Курсова
             // 
             // ConfirmRemoveButton
             // 
-            this.ConfirmRemoveButton.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ConfirmRemoveButton.Font = Style.StandardFont;
             this.ConfirmRemoveButton.Location = new System.Drawing.Point(584, 225);
             this.ConfirmRemoveButton.Name = "ConfirmRemoveButton";
             this.ConfirmRemoveButton.Size = new System.Drawing.Size(154, 47);
@@ -119,7 +119,7 @@ namespace Курсова
             // 
             // ClearButton
             // 
-            this.ClearButton.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ClearButton.Font = Style.ButtonFont;
             this.ClearButton.Location = new System.Drawing.Point(92, 329);
             this.ClearButton.Name = "ClearButton";
             this.ClearButton.Size = new System.Drawing.Size(321, 47);
@@ -132,7 +132,7 @@ namespace Курсова
             // 
             // ConfirmButton
             // 
-            this.ConfirmButton.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ConfirmButton.Font = Style.ButtonFont;
             this.ConfirmButton.Location = new System.Drawing.Point(417, 329);
             this.ConfirmButton.Name = "ConfirmButton";
             this.ConfirmButton.Size = new System.Drawing.Size(321, 47);
@@ -144,7 +144,7 @@ namespace Курсова
             // 
             // PreviousButton
             // 
-            this.PreviousButton.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.PreviousButton.Font = Style.StandardFont;
             this.PreviousButton.Location = new System.Drawing.Point(187, 225);
             this.PreviousButton.Name = "PreviousButton";
             this.PreviousButton.Size = new System.Drawing.Size(113, 47);
@@ -157,7 +157,7 @@ namespace Курсова
             // 
             // NextButton
             // 
-            this.NextButton.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.NextButton.Font = Style.StandardFont;
             this.NextButton.Location = new System.Drawing.Point(300, 225);
             this.NextButton.Name = "NextButton";
             this.NextButton.Size = new System.Drawing.Size(113, 47);
@@ -170,7 +170,7 @@ namespace Курсова
             // 
             // CancelRemoveButton
             // 
-            this.CancelRemoveButton.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.CancelRemoveButton.Font = Style.StandardFont;
             this.CancelRemoveButton.Location = new System.Drawing.Point(417, 225);
             this.CancelRemoveButton.Name = "CancelRemoveButton";
             this.CancelRemoveButton.Size = new System.Drawing.Size(161, 47);
@@ -183,7 +183,7 @@ namespace Курсова
             // 
             // SelectedElementLabel
             // 
-            this.SelectedElementLabel.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.SelectedElementLabel.Font = Style.StandardFont;
             this.SelectedElementLabel.Location = new System.Drawing.Point(92, 225);
             this.SelectedElementLabel.Name = "SelectedElementLabel";
             this.SelectedElementLabel.Size = new System.Drawing.Size(100, 47);
@@ -193,7 +193,7 @@ namespace Курсова
             // 
             // EnterNewElementTextBox
             // 
-            this.EnterNewElementTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.EnterNewElementTextBox.Font = Style.ButtonFont;
             this.EnterNewElementTextBox.Location = new System.Drawing.Point(92, 231);
             this.EnterNewElementTextBox.Name = "EnterNewElementTextBox";
             this.EnterNewElementTextBox.Size = new System.Drawing.Size(320, 31);
