@@ -18,7 +18,7 @@ namespace Курсова
         public DisplayResultForm()
         {
             InitializeComponent();
-            representer = new ArrayLabelRepresenter(this, new Point(120, 200), new Size(500, 50));
+            representer = new ArrayLabelRepresenter(this, GetArrayLocation(), new Size(500, 50));
             WaitBetweenIterations.Interval = 500;
             WaitBetweenIterations.Tick += NewIteration;
             
@@ -57,7 +57,7 @@ namespace Курсова
             this.ContinueButton.Hide();
             this.PauseButton.Show();
             this.PauseButton.Enabled = true;
-            this.StartSortibgButton.Text = "Restart";
+            this.StartSortingButton.Text = "⭯ Restart  ";
             this.representer.ResetCellPositions();
             WaitBetweenIterations.Start();
         }
@@ -77,7 +77,7 @@ namespace Курсова
             this.Pause(sender, e);
             representer.GetQuickResult();
             this.PauseButton.Enabled = false;
-            this.StartSortibgButton.Text = "Start sorting";
+            this.StartSortingButton.Text = "Start sorting";
             this.PauseButton.Show();
             this.ContinueButton.Hide();
         }
@@ -87,10 +87,10 @@ namespace Курсова
             this.WaitBetweenIterations.Stop();
             this.WaitBeforePaint.Start();
             (Label first, Label second) = representer[i, i + 1];
-            first.Paint += SetBorder;
-            second.Paint += SetBorder;
-            first.Refresh();
-            second.Refresh();
+            first.BackColor = Style.SelectedCellBgColor;
+            second.BackColor = Style.SelectedCellBgColor;
+            first.ForeColor = Style.SelectedCellFgColor;
+            second.ForeColor = Style.SelectedCellFgColor;
         }
         
         private void CheckSelected(Object timer, EventArgs e)
@@ -128,11 +128,6 @@ namespace Курсова
             second.BackColor = Style.StandardCellBgColor;
             second.ForeColor = Style.StandardCellFgColor;
 
-            first.BorderStyle = BorderStyle.None;
-            second.BorderStyle = BorderStyle.None;
-            first.Paint -= SetBorder;
-            second.Paint -= SetBorder;
-            
             if (i < representer.Count - j - 1)
             {
                 i++;
@@ -147,15 +142,16 @@ namespace Курсова
             else
             {
                 this.PauseButton.Enabled = false;
-                this.StartSortibgButton.Text = "Start sorting";
+                this.StartSortingButton.Text = "📊 Start sorting  ";
             }
         }
-        
-        private void SetBorder(object sender, PaintEventArgs e)
+
+        private Point GetArrayLocation()
         {
-            Label label = (Label) sender;
-            label.BorderStyle = BorderStyle.FixedSingle;
-            ControlPaint.DrawBorder(e.Graphics, label.DisplayRectangle, Color.Black, ButtonBorderStyle.Solid);
+            if (Program.InputedArray.Count > 32) return new Point(120, 100);
+            if (Program.InputedArray.Count >= 8)
+                return new Point(120, 200 - (Style.CellSize.Height+20)/2 * ((Program.InputedArray.Count - 1) / 8));
+            return new Point(440 - (Style.CellSize.Width+5)/2 * Program.InputedArray.Count, 200);
         }
     }
 }

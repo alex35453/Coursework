@@ -20,7 +20,7 @@ namespace Курсова
             this.Size = size;
             this.values = Program.InputedArray.ToArray();
             this.Count = values.Length;
-            representation = new Label[values.Length];
+            representation = new Label[values.Length+1];
             ResetCellPositions();
         }
         
@@ -49,8 +49,9 @@ namespace Курсова
             {
                 _form.Controls.Remove(cell);
             }
-            
-            for(int i = 0; i < representation.Length; i++)
+
+            int i;
+            for(i = 0; i < values.Length; i++)
             {
                 representation[i] = new Label();
                 representation[i].Font = Style.StandardFont;
@@ -59,9 +60,12 @@ namespace Курсова
                 representation[i].ForeColor = Style.StandardCellFgColor;
                 representation[i].TextAlign = ContentAlignment.MiddleCenter;
                 representation[i].Size = Style.CellSize;
-                representation[i].Location = new Point(this.Location.X+i*(Style.CellSize.Width+3), this.Location.Y);
+                representation[i].Location = new Point(this.Location.X+(i%8)*(Style.CellSize.Width+3), this.Location.Y+(i/8)*(Style.CellSize.Height+20));
                 _form.Controls.Add(representation[i]);
             }
+
+            if (i%8 > 0) i+=8;
+            _form.Controls.Add(new Label(){Size = new Size(0,0), Location = new Point(this.Location.X+i%8*(Style.CellSize.Width+3), this.Location.Y+i/8*(Style.CellSize.Height+20))});
         }
 
         public void GetQuickResult()
