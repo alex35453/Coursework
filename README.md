@@ -6,11 +6,13 @@ Visualizing bubble sort with animation using WinForms
 * Array input from file
 * Manual array input
 * Removing some elements from an array
-* Ramoving entire array
+* Removing entire array
 * Visualizing an array using labels
 * Adding the ***Quick result*** option, that skips animation
 * Adding ***GoBack*** button
+* Creating selecting animation
 
 ## Next sprint:
 
-* Creation sorting animation via ***Timer.Tick***
+* Creation swap animation via ***Timer.Tick***
+* Fix visualizing for huge arrays

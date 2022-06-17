@@ -22,10 +22,10 @@ namespace Курсова
             WaitBetweenIterations.Interval = 500;
             WaitBetweenIterations.Tick += NewIteration;
             
-            WaitBeforePaint.Interval = 250;
+            WaitBeforePaint.Interval = 500;
             WaitBeforePaint.Tick += CheckSelected;
             
-            WaitBeforeUnpaint.Interval = 250;
+            WaitBeforeUnpaint.Interval = 500;
             WaitBeforeUnpaint.Tick += UnpaintSelected;
         }
         private void GoBack(object sender, EventArgs e)
@@ -87,8 +87,10 @@ namespace Курсова
             this.WaitBetweenIterations.Stop();
             this.WaitBeforePaint.Start();
             (Label first, Label second) = representer[i, i + 1];
-            first.BorderStyle = BorderStyle.FixedSingle;
-            second.BorderStyle = BorderStyle.FixedSingle;
+            first.Paint += SetBorder;
+            second.Paint += SetBorder;
+            first.Refresh();
+            second.Refresh();
         }
         
         private void CheckSelected(Object timer, EventArgs e)
@@ -128,6 +130,8 @@ namespace Курсова
 
             first.BorderStyle = BorderStyle.None;
             second.BorderStyle = BorderStyle.None;
+            first.Paint -= SetBorder;
+            second.Paint -= SetBorder;
             
             if (i < representer.Count - j - 1)
             {
@@ -145,6 +149,13 @@ namespace Курсова
                 this.PauseButton.Enabled = false;
                 this.StartSortibgButton.Text = "Start sorting";
             }
+        }
+        
+        private void SetBorder(object sender, PaintEventArgs e)
+        {
+            Label label = (Label) sender;
+            label.BorderStyle = BorderStyle.FixedSingle;
+            ControlPaint.DrawBorder(e.Graphics, label.DisplayRectangle, Color.Black, ButtonBorderStyle.Solid);
         }
     }
 }

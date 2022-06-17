@@ -59,7 +59,7 @@ namespace Курсова
                 representation[i].ForeColor = Style.StandardCellFgColor;
                 representation[i].TextAlign = ContentAlignment.MiddleCenter;
                 representation[i].Size = Style.CellSize;
-                representation[i].Location = new Point(this.Location.X+i*Style.CellSize.Width, this.Location.Y);
+                representation[i].Location = new Point(this.Location.X+i*(Style.CellSize.Width+3), this.Location.Y);
                 _form.Controls.Add(representation[i]);
             }
         }

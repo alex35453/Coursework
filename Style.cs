@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Windows.Forms;
 
 namespace Курсова
 {
@@ -19,14 +20,13 @@ namespace Курсова
         public static Color ActionButtonFgColor = Color.White;
 
 
-        public static Color StandardCellBgColor = Color.White;
-        public static Color StandardCellFgColor = Color.Black;
+        public static Color StandardCellBgColor = Color.RoyalBlue;
+        public static Color StandardCellFgColor = Color.White;
         public static Color IncorrectOrderedCellBgColor = Color.Red;
         public static Color IncorrectOrderedCellFgColor = Color.White;
         public static Color CorrectOrderedCellBgColor = Color.Green;
         public static Color CorrectOrderedCellFgColor = Color.White;
 
         public static Size CellSize = new Size(80, 40);
-
     }
 }
