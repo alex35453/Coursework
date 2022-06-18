@@ -28,6 +28,6 @@ namespace Курсова
         public static Color SelectedCellBgColor = Color.CornflowerBlue;
         public static Color SelectedCellFgColor = Color.White;
         
-        public static Size CellSize = new Size(80, 40);
+        public static Size CellSize = new Size(95, 40);
     }
 }

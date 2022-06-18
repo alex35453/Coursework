@@ -13,7 +13,4 @@ Visualizing bubble sort with animation using WinForms
 * Selecting animation via ***Timer.Tick***
 * Visualizing for huge arrays fixed
 * Style changed
-
-## Next sprint:
-
-* Creation swap animation via ***Timer.Tick***
+* Swap animation via ***Timer.Tick*** created
