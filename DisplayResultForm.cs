@@ -77,6 +77,7 @@ namespace Курсова
             {
                 t.Start();
             }
+            this.ManuallyStopped.Clear();
             this.ContinueButton.Hide();
             this.PauseButton.Show();
         }
