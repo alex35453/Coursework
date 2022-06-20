@@ -7,22 +7,25 @@ namespace Курсова
 {
     public partial class DisplayResultForm : Form
     {
-        private ArrayLabelRepresenter representer;
-        private Timer WaitBetweenIterations = new Timer();
-        private Timer WaitBeforePaint = new Timer();
-        private Timer WaitBeforeSwap = new Timer();
-        private Timer WaitBeforeUnpaint = new Timer();
-        private Timer MovementDeley = new Timer();
+        private ArrayLabelRepresenter representer; // об'єкт, що відповідає за відображення масиву лейблами
         
-        private List<Timer> ManuallyStopped;
+        // Можна все зробити одним таймером, просто видаляючи одні обробники події Tick та додаючи інші, але
+        // це неоптимально, тому краще створимо по таймеру на задачу і запускатимемо їх у потрібному порядку
+        private Timer WaitBetweenIterations = new Timer(); // очікування перед вибором нової пари елементів
+        private Timer WaitBeforePaint = new Timer(); // очікування між вибором елементів та їх перевіркою і розфарбовуванням
+        private Timer WaitBeforeSwap = new Timer(); // очікування перед зміною розташувань елементів при сортуванні
+        private Timer WaitBeforeUnpaint = new Timer(); // очікування між зафарбуванням і поверненням до початкового кольору
+        private Timer MovementDeley = new Timer(); // таймер для реалізації "плавного" переміщення елементів
+        
+        private List<Timer> ManuallyStopped; // список теймерів, які працювали в момент натискання паузи, тому мають бути відновлені після натискання Continue
 
-        private int i;
-        private int j;
-        private int ctr;
+        private int i; // змінна для ітерації по елементам масиву
+        private int j; // змінна для обмеження ітерації
+        private int ctr; // лічильник кроків при переміщенні
         public DisplayResultForm()
         {
             InitializeComponent();
-            representer = new ArrayLabelRepresenter(this, CalculateArrayLocation(), new Size(500, 50));
+            representer = new ArrayLabelRepresenter(this, CalculateArrayLocation());
             WaitBetweenIterations.Interval = 500;
             WaitBetweenIterations.Tick += NewIteration;
             
@@ -37,12 +40,19 @@ namespace Курсова
             
             MovementDeley.Interval = 55;
         }
+        
+        /// <summary>
+        /// повертається до минулої форми шляхом закриття поточної форми, позначаючи це як програмне закриття
+        /// </summary>
         private void GoBack(object sender, EventArgs e)
         {
             Program.IsClosedByUser = false;
             this.Close();
         }
 
+        /// <summary>
+        /// призупиняє всі таймери і зберігає їх для подальшого відновлення
+        /// </summary>
         private void Pause(object sender, EventArgs e)
         {
             this.ContinueButton.Show();
@@ -71,6 +81,9 @@ namespace Курсова
             WaitBetweenIterations.Start();
         }
 
+        /// <summary>
+        /// відновлює всі зупинені паузою таймери
+        /// </summary>
         private void Continue(object sender, EventArgs e)
         {
             foreach (Timer t in ManuallyStopped)
@@ -92,8 +105,12 @@ namespace Курсова
             this.ContinueButton.Hide();
         }
 
-        private Label first, second;
-        private Point positionBeforeSwap1, positionBeforeSwap2;
+        private Label first, second; // лейбли, які потрібно перемістити
+        private Point positionBeforeSwap1, positionBeforeSwap2; // при виконанні анімації переміщень елементи не завжди приходять точно у задану точку, тому зберігаємо їх місце початку і призначення, аби потім підрівняти
+        
+        /// <summary>
+        /// виділяємо обрані клітинки і чекаємо розфарбування
+        /// </summary>
         private void NewIteration(Object timer, EventArgs e)
         {
             this.WaitBetweenIterations.Stop();
@@ -105,6 +122,9 @@ namespace Курсова
             this.WaitBeforePaint.Start();
         }
         
+        /// <summary>
+        /// перевіряємо обрані клітинки, зафарбовуємо їх та чекаємо або на переміщення, або на відновлення кольору
+        /// </summary>
         private void CheckSelected(Object timer, EventArgs e)
         {
             this.WaitBeforePaint.Stop();
@@ -129,6 +149,9 @@ namespace Курсова
             
         }
         
+        /// <summary>
+        /// зберігаємо позиції елементів та починаємо розсувати вертикально у різних напрямках, якщо вони у одному рядку, або ж одразу переміщуємо, якщо у різних
+        /// </summary>
         private void SwapElements(Object timer, EventArgs e)
         {
             WaitBeforeSwap.Stop();
@@ -144,12 +167,15 @@ namespace Курсова
             MovementDeley.Start();
         }
         
+        /// <summary>
+        /// вертикально розсуваємо елементи на певну відстань
+        /// </summary>
         private void Dilute(Object timer, EventArgs e)
         {
             ctr++;
             first.Location = new Point(first.Location.X, first.Location.Y + Style.CellSize.Height / 6);
             second.Location = new Point(second.Location.X, second.Location.Y - Style.CellSize.Height / 6);
-            if (ctr >= 5)
+            if (ctr >= 5) // коли закінчили розсовувати, починаємо міняти місцями
             {
                 MovementDeley.Stop();
                 ctr = 0;
@@ -159,6 +185,9 @@ namespace Курсова
             }
         }
         
+        /// <summary>
+        /// Коли елементи в різних рядах, плавно міняємо їх місцями не розсовуючи та чекаємо на відновлення кольорів
+        /// </summary>
         private void SwapOnBoundary(Object timer, EventArgs e)
         {
             ctr++;
@@ -174,6 +203,10 @@ namespace Курсова
                 WaitBeforeUnpaint.Start();
             }
         }
+        
+        /// <summary>
+        /// коли елементи в одному ряду, після розсування елементів плавно переміщуємо їх на свої нові вертикалі
+        /// </summary>
         private void SwapConsistent(Object timer, EventArgs e)
         {
             ctr++;
@@ -188,6 +221,10 @@ namespace Курсова
                 MovementDeley.Tick += Adjust;
             }
         }
+        
+        /// <summary>
+        /// коли елементи опинилися на своїх вертикалях, вирівнюємо їх в потрібний ряд та чекаємо на відновлення кольору
+        /// </summary>
         private void Adjust(Object timer, EventArgs e)
         {
             ctr++;
@@ -203,6 +240,10 @@ namespace Курсова
                 WaitBeforeUnpaint.Start();
             }
         }
+        
+        /// <summary>
+        /// відновлюємо колір клітинки до стандартного, знімаємо виділення та, якщо потрібно, чекаємо на наступну ітерацію
+        /// </summary>
         private void UnpaintSelected(Object timer, EventArgs e)
         {
             this.WaitBeforeUnpaint.Stop();
@@ -230,6 +271,10 @@ namespace Курсова
             }
         }
 
+        /// <summary>
+        /// вираховуємо початкове положення лейблочок залежно від кількості елементів у масиві
+        /// </summary>
+        /// <returns>точку початку розміщення лейблочок</returns>
         private Point CalculateArrayLocation()
         {
             if (Program.InputedArray.Count > 48) return new Point(80, 100);

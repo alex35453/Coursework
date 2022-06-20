@@ -2,6 +2,9 @@
 
 namespace Курсова
 {
+    /// <summary>
+    /// Клас для зберігання даних про загальний зовнішній вигляд елементів форм, таких як розмір, колір чи шрифт
+    /// </summary>
     public static class Style
     {
         public static readonly Font TitleFont = new Font("Times New Roman", 18F, FontStyle.Regular, GraphicsUnit.Point, 204);
